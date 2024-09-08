@@ -16,7 +16,7 @@ public class ProductPrint {
 
     }
 
-    public void printProductList(List<ProductDTO> productList, SearchCondition searchCondition) {
+    public void printProductList(List<ProductDTO> productList) {
         if(productList != null && !productList.isEmpty()) {
             productList.forEach(System.out::println);
         } else {
@@ -27,7 +27,7 @@ public class ProductPrint {
     public void printSuccessMessage(String successCode) {
         switch (successCode) {
             case "select":
-                System.out.println("제품을 조회할 수 없습니다.");
+                System.out.println("제품 조회 완료");
             case "regist":
                 System.out.println("제품 등록 완료");
             case "modify":
@@ -40,13 +40,13 @@ public class ProductPrint {
     public void printErrorMessage(String errorCode) {
         switch (errorCode) {
             case "select":
-                System.out.println("등록된 제품이 존재하지 않습니다.");
+                System.out.println("제품 조회 실패");
             case "regist":
-                System.out.println("신규 제품 등록 실패");
+                System.out.println("제품 등록 실패");
             case "modify":
-                System.out.println("신규 제품 등록 실패");
+                System.out.println("제품 수정 실패");
             case "delete":
-                System.out.println("신규 제품 등록 실패");
+                System.out.println("제품 삭제 실패");
         }
 
     }
