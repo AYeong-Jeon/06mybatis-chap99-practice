@@ -3,48 +3,71 @@ package com.management.product.model.service;
 import com.common.SearchCondition;
 import com.management.product.model.dao.ProductDAO;
 import com.management.product.model.dto.ProductDTO;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.common.Template.getSqlSessionFactory;
 
 public class ProductService {
 
     ProductDAO productDAO;
 
     public List<ProductDTO> selectAllProductList() {
-        return productDAO.selectAllProductList();
+        SqlSession sqlSession = getSqlSessionFactory();
 
+        ProductDAO mapper = sqlSession.getMapper(ProductDAO.class);
+        List<ProductDTO> menuList = mapper.selectAllProductList();
+
+        sqlSession.close();
+
+        return menuList;
     }
 
     public List<ProductDTO> selectProductByCondition(SearchCondition searchCondition) {
+        SqlSession sqlSession = getSqlSessionFactory();
+        ProductDAO mapper = sqlSession.getMapper(ProductDAO.class);
 
-        // 3. 조건에 따른 제품 목록을 조회하는 로직을 작성하세요.
-        // 　　아래 작성된 return null은 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return null;
+        List<ProductDTO> productList = mapper.selectProductByCondition(searchCondition);
+
+        sqlSession.close();
+
+        return productList;
 
     }
 
     public boolean registNewProduct(ProductDTO product) {
+        SqlSession sqlSession = getSqlSessionFactory();
+        ProductDAO mapper = sqlSession.getMapper(ProductDAO.class);
 
-        // 4. 제품 정보를 등록하는 로직을 작성하세요.
-        // 　　아래 작성된 return false 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return false;
+        int result = mapper.registNewProduct(product);
+
+        sqlSession.close();
+
+        return result > 0;
 
     }
 
     public boolean modifyProductInfo(ProductDTO product) {
+        SqlSession sqlSession = getSqlSessionFactory();
+        ProductDAO mapper = sqlSession.getMapper(ProductDAO.class);
 
-        // 5. 제품 정보를 수정하는 로직을 작성하세요.
-        // 　　아래 작성된 return false 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return false;
+        int result = mapper.modifyProductInfo(product);
 
+        sqlSession.close();
+
+        return result > 0;
     }
 
-    public boolean deleteProduct(Map<String, String> parameter) {
+    public boolean deleteProduct(int productCode) {
+        SqlSession sqlSession = getSqlSessionFactory();
+        ProductDAO mapper = sqlSession.getMapper(ProductDAO.class);
 
-        // 6. 제품 정보를 삭제하는 로직을 작성하세요.
-        // 　　아래 작성된 return false 과제 툴 오류를 제거하고자 임의 작성하였으니 지우고 로직을 작성하세요.
-        return false;
+        int result = mapper.deleteProduct(productCode);
 
+        sqlSession.close();
+
+        return result > 0;
     }
 }

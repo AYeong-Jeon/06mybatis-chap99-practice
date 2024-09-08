@@ -6,10 +6,19 @@ public class ProductDTO {
     private String productName;
     private String originCost;
     private String releaseDate;
-    private String salesQuantity;
+    private String discountRate;
+    private String salesQuantity="0";
     private String stockQuantity;
     private String categoryCode;
-    private String productionStatus;
+    private String productionStatus="Y";
+
+    public String getDiscountRate() {
+        return discountRate;
+    }
+
+    public void setDiscountRate(String discountRate) {
+        this.discountRate = discountRate;
+    }
 
     public ProductDTO() {
     }
@@ -50,7 +59,7 @@ public class ProductDTO {
     }
 
     public String getReleaseDate() {
-        return releaseDate;
+        return releaseDate.replace("-", "");
     }
 
     public void setReleaseDate(String releaseDate) {

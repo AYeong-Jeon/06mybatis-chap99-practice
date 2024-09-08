@@ -6,6 +6,11 @@
 
     <properties resource="config/connection-info.properties"/>
 
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+
     <typeAliases>
         <typeAlias type="com.management.product.model.dto.ProductDTO" alias="ProductDTO"/>
     </typeAliases>
